@@ -26,19 +26,18 @@ describe('Employee form create tests', () => {
         const emailInput = screen.getByTestId("email");
         const categoriesInput = screen.getByLabelText("Departamento");
 
-        await selectEvent.select(categoriesInput, 'Sales');
+        await waitFor(() => {selectEvent.select(categoriesInput, 'Sales');}); 
         userEvent.type(nameInput, 'Abel');
         userEvent.type(emailInput, 'abel@gmail.com');
 
         const submitButton = screen.getByRole('button', { name: /salvar/i})
         userEvent.click(submitButton);
 
-        await waitFor(() => {
+        waitFor(() => {
             const toastElement = screen.getByText('Cadastrado com sucesso');
             expect(toastElement).toBeInTheDocument();
-        });
-
-        expect(history.location.pathname).toEqual('/admin/employees');
+            expect(history.location.pathname).toEqual('/admin/employees');
+        });        
     });
 
     test('should show 3 error messages when just clicking submit', async () => {

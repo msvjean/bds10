@@ -43,7 +43,7 @@ const Form = () => {
       withCredentials: true,
     };
     requestBackend(config).then(() => {
-      toast.info('Empregado cadastrado com sucesso');
+      toast.info('Cadastrado com sucesso');
       history.push('/admin/employees');
     });
   };
